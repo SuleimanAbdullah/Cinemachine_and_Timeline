@@ -5,34 +5,31 @@ using Cinemachine;
 
 public class FOV : MonoBehaviour
 {
-    private CinemachineVirtualCamera _cam;
-
     [SerializeField]
-    private GameObject _target1;
-    [SerializeField]
-    private GameObject _target2;
+    private CinemachineVirtualCamera[] _cams;
 
-    private bool _isFirstTarget;
+    private bool _isFirstCam;
     void Awake()
     {
-        _cam = GetComponent<CinemachineVirtualCamera>();
-        _isFirstTarget = true;
+        _isFirstCam = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (_isFirstTarget == true)
+            if (_isFirstCam == true)
             {
-                _cam.LookAt = _target1.transform;
-                _isFirstTarget = false;
+                _cams[1].Priority = 10;
+                _cams[0].Priority = 11;
+                _isFirstCam = false;
             }
             else
             {
-                _cam.LookAt = _target2.transform;
-                _isFirstTarget = true;
+                _cams[0].Priority = 10;
+                _cams[1].Priority = 11;
+                _isFirstCam = true;
             }
         }
     }
