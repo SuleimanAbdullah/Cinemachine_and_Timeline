@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    [SerializeField] private CameraShake _cameraShake;
 
     [SerializeField] private CharacterController _controller;
     [SerializeField] private float _moveSpeed;
@@ -24,6 +24,16 @@ public class Player : MonoBehaviour
         Vector3 rotation = new Vector3(0, _horizontal * _rotateSpeed * Time.deltaTime, 0);
         this.transform.Rotate(rotation);
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            FireGun();
+        }
+
+    }
+
+    void FireGun()
+    {
+        _cameraShake.Shake();
     }
 }
 
